@@ -100,11 +100,15 @@ Sample data for all three tables is included in [`/sql`](data_sql_and_json/Sampl
 ![ADLS containers](Screenshots/ADLS_Gold.png)
 
 ### Databricks Notebook — Transformation
+![Databricks Transformation ](Screenshots/Databricks.png)
 ![Databricks notebook ](databricks/Retail_Analytics_Project.ipynb)
 
 ### Power BI
+Semantic Diagram
 ![Semantic Diagram](Screenshots/Semantic_Diagram.png)
-![Power BI dashboard](Screenshots/Sales Dashboard.png)
+
+Dashboard
+![Power BI dashboard](Screenshots/Sales_Dashboard.png)
 
 ---
 
