@@ -1,0 +1,66 @@
+{
+  "Linked services": [
+    {
+      "name": "[concat(parameters('factoryName'), '/linked service_sql server')]",
+      "type": "Microsoft.DataFactory/factories/linkedServices",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "annotations": [
+          
+        ],
+        "type": "SqlServer",
+        "typeProperties": {
+          "server": "[parameters('linked service_sql server_properties_typeProperties_server')]",
+          "database": "[parameters('linked service_sql server_properties_typeProperties_database')]",
+          "encrypt": "mandatory",
+          "trustServerCertificate": false,
+          "authenticationType": "SQL",
+          "userName": "[parameters('linked service_sql server_properties_typeProperties_userName')]"
+        }
+      },
+      "dependsOn": [
+        
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/linked service_DataLake')]",
+      "type": "Microsoft.DataFactory/factories/linkedServices",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "annotations": [
+          
+        ],
+        "type": "AzureBlobFS",
+        "typeProperties": {
+          "url": "[parameters('linked service_DataLake_properties_typeProperties_url')]",
+          "accountKey": {
+            "type": "SecureString",
+            "value": "[parameters('linked service_DataLake_accountKey')]"
+          }
+        }
+      },
+      "dependsOn": [
+        
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/linked service_HTTP')]",
+      "type": "Microsoft.DataFactory/factories/linkedServices",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "annotations": [
+          
+        ],
+        "type": "HttpServer",
+        "typeProperties": {
+          "url": "[parameters('linked service_HTTP_properties_typeProperties_url')]",
+          "enableServerCertificateValidation": false,
+          "authenticationType": "Anonymous"
+        }
+      },
+      "dependsOn": [
+        
+      ]
+    }
+  ]
+}

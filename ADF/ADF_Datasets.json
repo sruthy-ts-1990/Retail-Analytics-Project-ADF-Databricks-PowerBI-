@@ -1,0 +1,268 @@
+{
+  "datasets": [
+    {
+      "name": "[concat(parameters('factoryName'), '/StoresParquet')]",
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "linked service_DataLake",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [
+          
+        ],
+        "type": "Parquet",
+        "typeProperties": {
+          "location": {
+            "type": "AzureBlobFSLocation",
+            "folderPath": "Bronze",
+            "fileSystem": "destination"
+          },
+          "compressionCodec": "snappy"
+        },
+        "schema": [
+          
+        ]
+      },
+      "dependsOn": [
+        "[concat(variables('factoryId'), '/linkedServices/linked service_DataLake')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/Data_Json')]",
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "linked service_DataLake",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [
+          
+        ],
+        "type": "Json",
+        "typeProperties": {
+          "location": {
+            "type": "AzureBlobFSLocation",
+            "fileName": "customers.json",
+            "folderPath": "Bronze",
+            "fileSystem": "destination"
+          }
+        },
+        "schema": {
+          
+        }
+      },
+      "dependsOn": [
+        "[concat(variables('factoryId'), '/linkedServices/linked service_DataLake')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/DB_Products')]",
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "linked service_sql server",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [
+          
+        ],
+        "type": "SqlServerTable",
+        "schema": [
+          {
+            "name": "product_id",
+            "type": "int",
+            "precision": 10
+          },
+          {
+            "name": "product_name",
+            "type": "varchar"
+          },
+          {
+            "name": "category",
+            "type": "varchar"
+          },
+          {
+            "name": "price",
+            "type": "decimal",
+            "precision": 10,
+            "scale": 2
+          }
+        ],
+        "typeProperties": {
+          "schema": "dbo",
+          "table": "products"
+        }
+      },
+      "dependsOn": [
+        "[concat(variables('factoryId'), '/linkedServices/linked service_sql server')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/ProductsParquet')]",
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "linked service_DataLake",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [
+          
+        ],
+        "type": "Parquet",
+        "typeProperties": {
+          "location": {
+            "type": "AzureBlobFSLocation",
+            "folderPath": "Bronze",
+            "fileSystem": "destination"
+          },
+          "compressionCodec": "snappy"
+        },
+        "schema": [
+          
+        ]
+      },
+      "dependsOn": [
+        "[concat(variables('factoryId'), '/linkedServices/linked service_DataLake')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/TransactionsParquet')]",
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "linked service_DataLake",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [
+          
+        ],
+        "type": "Parquet",
+        "typeProperties": {
+          "location": {
+            "type": "AzureBlobFSLocation",
+            "folderPath": "Bronze",
+            "fileSystem": "destination"
+          },
+          "compressionCodec": "snappy"
+        },
+        "schema": [
+          
+        ]
+      },
+      "dependsOn": [
+        "[concat(variables('factoryId'), '/linkedServices/linked service_DataLake')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/DB_Transactions')]",
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "linked service_sql server",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [
+          
+        ],
+        "type": "SqlServerTable",
+        "schema": [
+          {
+            "name": "transaction_id",
+            "type": "int",
+            "precision": 10
+          },
+          {
+            "name": "customer_id",
+            "type": "int",
+            "precision": 10
+          },
+          {
+            "name": "product_id",
+            "type": "int",
+            "precision": 10
+          },
+          {
+            "name": "store_id",
+            "type": "int",
+            "precision": 10
+          },
+          {
+            "name": "quantity",
+            "type": "int",
+            "precision": 10
+          },
+          {
+            "name": "transaction_date",
+            "type": "date"
+          }
+        ],
+        "typeProperties": {
+          "schema": "dbo",
+          "table": "transactions"
+        }
+      },
+      "dependsOn": [
+        "[concat(variables('factoryId'), '/linkedServices/linked service_sql server')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/DB_Stores')]",
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "linked service_sql server",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [
+          
+        ],
+        "type": "SqlServerTable",
+        "schema": [
+          
+        ],
+        "typeProperties": {
+          "schema": "dbo",
+          "table": "stores"
+        }
+      },
+      "dependsOn": [
+        "[concat(variables('factoryId'), '/linkedServices/linked service_sql server')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('factoryName'), '/Github_Json')]",
+      "type": "Microsoft.DataFactory/factories/datasets",
+      "apiVersion": "2018-06-01",
+      "properties": {
+        "linkedServiceName": {
+          "referenceName": "linked service_HTTP",
+          "type": "LinkedServiceReference"
+        },
+        "annotations": [
+          
+        ],
+        "type": "Json",
+        "typeProperties": {
+          "location": {
+            "type": "HttpServerLocation",
+            "relativeUrl": "teena-akumenbyq/Data-Engineering-/refs/heads/main/Azure%20Notes/customers.json"
+          }
+        },
+        "schema": {
+          
+        }
+      },
+      "dependsOn": [
+        "[concat(variables('factoryId'), '/linkedServices/linked service_HTTP')]"
+      ]
+    }
+  ]
+}
